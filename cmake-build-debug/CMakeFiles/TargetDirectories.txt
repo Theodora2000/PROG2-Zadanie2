@@ -1,0 +1,3 @@
+C:/Users/WIN10/Desktop/FEI/4.semeter/PROG2/Zadania/Zadanie2/PROG2-Zadanie2/cmake-build-debug/CMakeFiles/PROG2_Zadanie2.dir
+C:/Users/WIN10/Desktop/FEI/4.semeter/PROG2/Zadania/Zadanie2/PROG2-Zadanie2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/WIN10/Desktop/FEI/4.semeter/PROG2/Zadania/Zadanie2/PROG2-Zadanie2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
