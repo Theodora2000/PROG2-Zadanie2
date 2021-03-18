@@ -19,6 +19,11 @@ int funk_na_zotredenie(int pole[], int typ, int zostalo, int zmensi){
     }while(zostalo);
 }
 
+int max(int num1, int num2)
+{
+    return (num1 > num2 ) ? num1 : num2;
+}
+
 void srnd(int seed) {
     SEED = seed;
 }
@@ -109,6 +114,66 @@ int main() {
     for(int i=0;i<pBooster;i++){
         printf("%d ", pozecieBooster[i]);
     }
+    int hrac;
+    int hrac1=1;
+    int hrac2=2;
+    int hrac1_pred = -1;
+    int hrac2_pred = -1;
+    int hrac1_po;
+    int hrac2_po;
+    int b_hrac1_pred=0;
+    int b_hrac1_po;
+    int b_hrac2_pred=0;
+    int b_hrac2_po;
+    int tah=1;
+    int R1=0;
+    int R2=0;
+    int d=0;
+
+    if(tah%2==1){
+        hrac= hrac1;
+        R1= rnd(1,6);
+        R2=rnd(1,6);
+        if((hrac1_pred>0 && hrac1_pred<n-1)){
+            if( (hrac1_pred<hrac2_pred) && (hrac2_pred>0 && hrac2_pred<n-1) && (R1=R2=6)){
+                hrac1_po = hrac2_po;
+                hrac2_po = hrac1_po;
+                d=0;
+            }
+            else if((hrac1_pred>hrac2_pred) && (R1=R2=1) && (hrac2_pred>0 && hrac2_pred<n-1)){
+                hrac1_po = hrac2_po;
+                hrac2_po = hrac1_po;
+                d=0;
+            }
+            else{
+                d=max(R1,R2);
+            }
+        }else{
+            if((R1+R2)>7){
+                hrac1_po = zavodna_draha[0];
+                d=(R1+R2-7);
+            }
+        }
+        if(hrac1_po==2){
+            b_hrac1_po++;
+            zavodna_draha[hrac1_po+1]=0;
+        }
+        if(d>0){
+            printf("D %d", d);
+            printf("pre %d", hrac1_pred);
+            printf("bpo %d",b_hrac1_po);
+            hrac1_po = hrac1_pred + d + b_hrac1_po;
+        }
+    }
+
+
+    printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac, hrac1_pred, b_hrac1_pred, R1, R2, hrac1_po,b_hrac1_po );
+    hrac1_pred=hrac1_po;
+    b_hrac1_pred=b_hrac1_po;
+    tah++;
+
+
+
 
 
 
