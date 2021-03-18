@@ -1,5 +1,5 @@
 //Zadanie2 - Angry Rockets
-
+#include <stdbool.h>
 #include <stdio.h>
 #define R_MAX 2147483647 // vsetky generovane cisla su mensie ako R_MAX
 static long long unsigned int SEED = 0x1; // seed generatora
@@ -64,21 +64,29 @@ int main() {
 
         }
     }
-
-    //sort
-    for(int i=0;i<pBlocker-1;i++){
-        for(int j=1;j<pBlocker;j++){
-            if(i!=j){
-            if(pozecieBlocker[i]>pozecieBlocker[j]){
+    //bouble sort
+    int zostalo;
+    int zmensi= 1;
+    do{
+        zostalo = 0;
+        for(int i=0;i<(pBlocker-zmensi);i++){
+            if(pozecieBlocker[i]>pozecieBlocker[i+1]){
                 int temp = pozecieBlocker[i];
-                pozecieBlocker[i]  = pozecieBlocker[j];
-                pozecieBlocker[j] = temp;
+                pozecieBlocker[i]=pozecieBlocker[i+1];
+                pozecieBlocker[i+1]=temp;
+                zostalo = 1;
             }
         }
+        zmensi++;
+    }while(zostalo);
 
-        }
+    for(int i=0;i<pBlocker;i++){
         printf("%d ", pozecieBlocker[i]);
     }
+
+
+
+
 
     return 0;
 }
