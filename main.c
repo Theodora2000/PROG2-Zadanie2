@@ -65,20 +65,23 @@ int main() {
 
     while(pBlocker!=m1){
         pozicia = rnd(1,n-1);
-        if(zavodna_draha[pozicia-1]==0){
-            zavodna_draha[pozicia-1]= 1;
+        if(zavodna_draha[pozicia]==0){
+            zavodna_draha[pozicia]= 1;
             pozecieBlocker[pBlocker]= pozicia;
             pBlocker++;
         }else{
             do{
                 pozicia = rnd(1,n-1);
-            }while(zavodna_draha[pozicia-1]==1);
-            zavodna_draha[pozicia-1]= 1;
+            }while(zavodna_draha[pozicia]==1);
+            zavodna_draha[pozicia]= 1;
             pozecieBlocker[pBlocker]= pozicia;
             pBlocker++;
 
         }
     }
+
+
+
 
     //bouble sort
     int zostalo;
@@ -87,16 +90,16 @@ int main() {
 
     while(pBooster!=m2){
         pozicia = rnd(1,n-1);
-        if(zavodna_draha[pozicia-1]==0 && zavodna_draha[pozicia-1]!=1 && zavodna_draha[pozicia-1]!=2){
-            zavodna_draha[pozicia-1]= 2;
+        if(zavodna_draha[pozicia]==0 && zavodna_draha[pozicia]!=1 && zavodna_draha[pozicia]!=2){
+            zavodna_draha[pozicia]= 2;
             //printf("%d ", pozicia);
             pozecieBooster[pBooster]= pozicia;
             pBooster++;
         }else{
             do{
                 pozicia = rnd(1,n-1);
-            }while(zavodna_draha[pozicia-1]==1 || zavodna_draha[pozicia-1]==2);
-            zavodna_draha[pozicia-1]= 2;
+            }while(zavodna_draha[pozicia]==1 || zavodna_draha[pozicia]==2);
+            zavodna_draha[pozicia]= 2;
             pozecieBooster[pBooster]= pozicia;
             pBooster++;
 
@@ -114,6 +117,11 @@ int main() {
     for(int i=0;i<pBooster;i++){
         printf("%d ", pozecieBooster[i]);
     }
+    printf("\n");
+    for(int i=0;i<n;i++){
+        printf("%d ", zavodna_draha[i]);
+    }
+    /*
     int hrac;
     int hrac1=1;
     int hrac2=2;
@@ -178,7 +186,7 @@ int main() {
 
 
 
-
+*/
 
     return 0;
 }
