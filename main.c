@@ -139,7 +139,7 @@ int main() {
     int R1=0;
     int R2=0;
     int d=0;
-for(int i=0;i<8;i++){
+while(1){
     if(tah%2==1){
         R1= rnd(1,6);
         R2=rnd(1,6);
@@ -161,7 +161,7 @@ for(int i=0;i<8;i++){
                 hrac2[p_h2] = hrac2[p_h2 - 1];
                 int temp = hrac1[p_h1];
                 hrac1[p_h1] = hrac2[p_h2];
-                temp = hrac2[p_h2];
+                hrac2[p_h2]=temp;
                 d = 0;
             } else if ((hrac1[p_h1] > hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 == R2 == 1)) {
                 p_h1++;
@@ -170,11 +170,11 @@ for(int i=0;i<8;i++){
                 hrac2[p_h2] = hrac2[p_h2 - 1];
                 int temp = hrac1[p_h1];
                 hrac1[p_h1] = hrac2[p_h2];
-                temp = hrac2[p_h2];
+                hrac2[p_h2]=temp;
                 d = 0;
             } else {
                 d = max(R1, R2);
-                printf("%d", d);
+
             }
         }
 
@@ -190,7 +190,7 @@ for(int i=0;i<8;i++){
             pocet_nazbieranych_b1++;
             booster1[p_b1]= pocet_nazbieranych_b1;
             zavodna_draha[hrac1[p_h1]]==0;
-        }else if(zavodna_draha[hrac1[p_h1]]==1){
+        }/*else if(zavodna_draha[hrac1[p_h1]]==1){
             if(booster1[p_b1]>0){
                 //p_b1++;
                 //pocet_nazbieranych_b1=0;
@@ -208,6 +208,9 @@ for(int i=0;i<8;i++){
 
             printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[p_h1-1], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
 
+        }
+        if(hrac1[p_h1]>n){
+            break;
         }
     }else{
         d=0;
@@ -230,9 +233,10 @@ for(int i=0;i<8;i++){
                 p_h2++;
                 hrac1[p_h1] = hrac1[p_h1 - 1];
                 hrac2[p_h2] = hrac2[p_h2 - 1];
+
                 int temp = hrac2[p_h2];
                 hrac2[p_h2] = hrac1[p_h1];
-                temp = hrac1[p_h1];
+                hrac1[p_h1]=temp;
                 d = 0;
             } else if ((hrac2[p_h2] > hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 == R2 == 1)) {
                 p_h1++;
@@ -241,19 +245,24 @@ for(int i=0;i<8;i++){
                 hrac2[p_h2] = hrac2[p_h2 - 1];
                 int temp = hrac2[p_h2];
                 hrac2[p_h2] = hrac1[p_h1];
-                temp = hrac1[p_h1];
+                hrac1[p_h1]=temp;
                 d = 0;
             } else {
                 d = max(R1, R2);
+
             }
         }
 
 
-
         if(d>0){
+
             p_h2++;
+
             hrac2[p_h2]=hrac2[p_h2-1]+d+booster2[p_b2];
+
+
         }
+
 /*
         if(zavodna_draha[hrac1[p_h1]]==2){
             p_b1++;
@@ -272,6 +281,7 @@ for(int i=0;i<8;i++){
         }
 
 */
+
         if(tah==2 && p_h2==2){
             printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[0], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
 
@@ -280,6 +290,9 @@ for(int i=0;i<8;i++){
 
         }
 
+    }
+    if(hrac2[p_h2]>n){
+        break;
     }
 
 
