@@ -139,7 +139,7 @@ int main() {
     int R1=0;
     int R2=0;
     int d=0;
-while(1){
+for(int i=0;i<12;i++){
     if(tah%2==1){
         R1= rnd(1,6);
         R2=rnd(1,6);
@@ -184,13 +184,14 @@ while(1){
             p_h1++;
             hrac1[p_h1]=hrac1[p_h1-1]+d+booster1[p_b1];
         }
-/*
+
         if(zavodna_draha[hrac1[p_h1]]==2){
-            p_b1++;
             pocet_nazbieranych_b1++;
+            p_b1++;
             booster1[p_b1]= pocet_nazbieranych_b1;
-            zavodna_draha[hrac1[p_h1]]==0;
-        }/*else if(zavodna_draha[hrac1[p_h1]]==1){
+            zavodna_draha[hrac1[p_h1]]=0;
+        }
+        /*else if(zavodna_draha[hrac1[p_h1]]==1){
             if(booster1[p_b1]>0){
                 //p_b1++;
                 //pocet_nazbieranych_b1=0;
@@ -263,13 +264,13 @@ while(1){
 
         }
 
-/*
-        if(zavodna_draha[hrac1[p_h1]]==2){
-            p_b1++;
-            pocet_nazbieranych_b1++;
-            booster1[p_b1]= pocet_nazbieranych_b1;
-            zavodna_draha[hrac1[p_h1]]==0;
-        }else if(zavodna_draha[hrac1[p_h1]]==1){
+        if(zavodna_draha[hrac2[p_h2]]==2){
+            p_b2++;
+            pocet_nazbieranych_b2++;
+            booster2[p_b2]= pocet_nazbieranych_b2;
+            zavodna_draha[hrac2[p_h2]]==0;
+        }
+        /*else if(zavodna_draha[hrac1[p_h1]]==1){
             if(booster1[p_b1]>0){
                 //p_b1++;
                 //pocet_nazbieranych_b1=0;
@@ -300,5 +301,8 @@ while(1){
 
     tah++;
 }
+    for(int i=0;i<n;i++){
+        printf("%d ", zavodna_draha[i]);
+    }
     return 0;
 }
