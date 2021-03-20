@@ -139,7 +139,7 @@ int main() {
     int R1=0;
     int R2=0;
     int d=0;
-for(int i=0;i<2;i++){
+for(int i=0;i<8;i++){
     if(tah%2==1){
         R1= rnd(1,6);
         R2=rnd(1,6);
@@ -154,7 +154,7 @@ for(int i=0;i<2;i++){
         }
 
         if((hrac1[p_h1]>0 && hrac1[p_h1]<n-1)) {
-            if ((hrac1[p_h1] < hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 = R2 = 6)) {
+            if ((hrac1[p_h1] < hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 == R2 == 6)) {
                 p_h1++;
                 p_h2++;
                 hrac1[p_h1] = hrac1[p_h1 - 1];
@@ -163,7 +163,7 @@ for(int i=0;i<2;i++){
                 hrac1[p_h1] = hrac2[p_h2];
                 temp = hrac2[p_h2];
                 d = 0;
-            } else if ((hrac1[p_h1] > hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 = R2 = 1)) {
+            } else if ((hrac1[p_h1] > hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 == R2 == 1)) {
                 p_h1++;
                 p_h2++;
                 hrac1[p_h1] = hrac1[p_h1 - 1];
@@ -174,6 +174,7 @@ for(int i=0;i<2;i++){
                 d = 0;
             } else {
                 d = max(R1, R2);
+                printf("%d", d);
             }
         }
 
@@ -200,9 +201,14 @@ for(int i=0;i<2;i++){
             }
         }
 
-*/
-        printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[p_h1-1], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
+*/      if(tah==1 && p_h1==2){
+            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[0], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
 
+        }else{
+
+            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[p_h1-1], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
+
+        }
     }else{
         d=0;
         R1= rnd(1,6);
@@ -215,11 +221,11 @@ for(int i=0;i<2;i++){
         }else{
             p_h2++;
             hrac2[p_h2]=hrac2[p_h2-1];
-            printf("\n%d",hrac2[p_h2]);
+            //printf("\n%d",hrac2[p_h2]);
         }
 
         if((hrac2[p_h2]>0 && hrac2[p_h2]<n-1)) {
-            if ((hrac2[p_h2] < hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 = R2 = 6)) {
+            if ((hrac2[p_h2] < hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 == R2 == 6)) {
                 p_h1++;
                 p_h2++;
                 hrac1[p_h1] = hrac1[p_h1 - 1];
@@ -228,7 +234,7 @@ for(int i=0;i<2;i++){
                 hrac2[p_h2] = hrac1[p_h1];
                 temp = hrac1[p_h1];
                 d = 0;
-            } else if ((hrac2[p_h2] > hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 = R2 = 1)) {
+            } else if ((hrac2[p_h2] > hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 == R2 == 1)) {
                 p_h1++;
                 p_h2++;
                 hrac1[p_h1] = hrac1[p_h1 - 1];
@@ -246,7 +252,6 @@ for(int i=0;i<2;i++){
 
         if(d>0){
             p_h2++;
-            printf("\n d %d", d);
             hrac2[p_h2]=hrac2[p_h2-1]+d+booster2[p_b2];
         }
 /*
@@ -267,7 +272,13 @@ for(int i=0;i<2;i++){
         }
 
 */
-        printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[p_h2-1], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
+        if(tah==2 && p_h2==2){
+            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[0], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
+
+        }else{
+            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[p_h2-1], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
+
+        }
 
     }
 
