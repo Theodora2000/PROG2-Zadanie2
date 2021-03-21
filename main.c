@@ -118,191 +118,210 @@ int main() {
     for(int i=0;i<pBooster;i++){
         printf("%d ", pozecieBooster[i]);
     }
-    printf("\n");
-    for(int i=0;i<n;i++){
-        printf("%d ", zavodna_draha[i]);
-    }
 
-    int hrac_1=1;
-    int hrac_2=2;
-    int hrac1[pMAX]={-1};
-    int p_h1=0;
-    int hrac2[pMAX]={-1};
-    int p_h2=0;
-    int booster1[pMAX]={0};
-    int p_b1=0;
-    int pocet_nazbieranych_b1=0;
-    int booster2[pMAX]={0};
-    int p_b2=0;
-    int pocet_nazbieranych_b2=0;
+
+
+    int poz1=-1;
+    int poz2=-1;
+    int bu1=0;
+    int bu2=0;
+    int blc1=0;
+    int blc2=0;
+    int R1;
+    int R2;
+    int d;
+    int vytaz=0;
     int tah=1;
-    int R1=0;
-    int R2=0;
-    int d=0;
-for(int i=0;i<12;i++){
-    if(tah%2==1){
-        R1= rnd(1,6);
-        R2=rnd(1,6);
+    int stara=0;
+    int stara_boo=0;
+    int stara_o=0;
+    int stara_o_boo=0;
 
-        if(hrac1[p_h1]==-1 && ((R1+R2>7))){
-            p_h1++;
-            hrac1[p_h1]=zavodna_draha[0];
-            d=(R1+R2-7);
-        }else{
-            p_h1++;
-            hrac1[p_h1]=hrac1[p_h1-1];
-        }
 
-        if((hrac1[p_h1]>0 && hrac1[p_h1]<n-1)) {
-            if ((hrac1[p_h1] < hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 == R2 == 6)) {
-                p_h1++;
-                p_h2++;
-                hrac1[p_h1] = hrac1[p_h1 - 1];
-                hrac2[p_h2] = hrac2[p_h2 - 1];
-                int temp = hrac1[p_h1];
-                hrac1[p_h1] = hrac2[p_h2];
-                hrac2[p_h2]=temp;
-                d = 0;
-            } else if ((hrac1[p_h1] > hrac2[p_h2]) && (hrac2[p_h2] > 0 && hrac2[p_h2] < n - 1) && (R1 == R2 == 1)) {
-                p_h1++;
-                p_h2++;
-                hrac1[p_h1] = hrac1[p_h1 - 1];
-                hrac2[p_h2] = hrac2[p_h2 - 1];
-                int temp = hrac1[p_h1];
-                hrac1[p_h1] = hrac2[p_h2];
-                hrac2[p_h2]=temp;
-                d = 0;
-            } else {
-                d = max(R1, R2);
 
+    while(1>0){
+        R1 = rnd(1,6);
+        R2= rnd(1,6);
+        if(poz1==-1)
+        {
+
+            if(R1+R2>7)
+            {
+                poz1=0;
+                stara=-1;
+                d = R1+R2-7;
             }
+            else
+                {
+
+                    d=0;
+                    stara=poz1;
+
+                }
+
         }
+        else{
 
+                if(poz1<poz2 && R1==6 && R2==6){
+                    int temp = poz1;
+                    poz1 = poz2;
+                    temp = poz2;
+                    d=0;
+                }else if(poz1>poz2 && R1==1 && R2==1 && poz2>0 ){
+                    int temp = poz2;
+                    poz2 = poz1;
+                    temp = poz1;
+                    d=0;
+                }else{
+                    d = max(R1,R2);
+                }
 
+        }
 
         if(d>0){
-            p_h1++;
-            hrac1[p_h1]=hrac1[p_h1-1]+d+booster1[p_b1];
+            if(poz1==0)
+            {
+                poz1 = poz1+d+bu1;
+            }
+            else
+            {
+                stara= poz1;
+                poz1 = stara+d+bu1;
+
+            }
+
+        }
+        if(zavodna_draha[poz1]==2){
+            stara_boo = bu1;
+            bu1= stara_boo+1;
+            zavodna_draha[poz1]=0;
+        }
+        if(zavodna_draha[poz1]==1){
+            if(bu1>0){
+                stara_boo = bu1;
+                bu1= 0;
+                stara=poz1;
+            }else{
+
+                poz1 = -1;
+            }
+            zavodna_draha[poz1]=0;
         }
 
-        if(zavodna_draha[hrac1[p_h1]]==2){
-            pocet_nazbieranych_b1++;
-            p_b1++;
-            booster1[p_b1]= pocet_nazbieranych_b1;
-            zavodna_draha[hrac1[p_h1]]=0;
+        if(poz1==poz2){
+            stara_o = poz2;
+            poz2 = -1;
+            stara_o_boo = bu2;
+
         }
-        /*else if(zavodna_draha[hrac1[p_h1]]==1){
-            if(booster1[p_b1]>0){
-                //p_b1++;
-                //pocet_nazbieranych_b1=0;
-                booster1[p_b1++]=0;
-                hrac1[p_b1++]=zavodna_draha[hrac1[p_h1-1]];
+
+
+
+        printf("\n[%d,1] [%d,%d] [%d,%d] [%d,%d]", tah, stara, stara_boo, R1, R2, poz1, bu1);
+        stara_boo = bu1;
+        if(poz1>=n)
+            {
+                vytaz=1;
+                break;
+            }
+            tah++;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        R1 = rnd(1,6);
+        R2= rnd(1,6);
+        if(poz2==-1)
+        {
+            if(R1+R2>7)
+            {
+                poz2=0;
+                stara_o=-1;
+                d = R1+R2-7;
+            }
+            else
+            {
+
+                d=0;
+                stara_o=poz2;
+            }
+
+        }
+
+        else{
+
+            if(poz2<poz1 && R1==6 && R2==6){
+                int temp = poz2;
+                poz2 = poz1;
+                temp = poz1;
+                d=0;
+            }else if(poz2>poz1 && R1==1 && R2==1 && poz1>0 ){
+                int temp = poz1;
+                poz1 = poz2;
+                temp = poz2;
+                d=0;
             }else{
-                hrac1[p_h1++]=-1;
+                d = max(R1,R2);
+            }
+
+        }
+
+        if(d>0){
+            if(poz2==0)
+            {
+                poz2 = poz2+d+bu2;
+            }
+            else
+                {
+                    stara_o= poz2;
+                    poz2 = stara_o+d+bu2;
+
+                }
+
+        }
+        if(poz2!=-1)
+        {
+            if(zavodna_draha[poz2]==2){
+                stara_o_boo = bu2;
+                bu2= stara_o_boo+1;
+                zavodna_draha[poz2]=0;
+            }
+            if(zavodna_draha[poz2]==1){
+                if(bu2>0){
+                    stara_o_boo = bu2;
+                    bu2= 0;
+                    stara_o=poz2;
+                }else{
+
+                    poz2 = -1;
+                }
+                zavodna_draha[poz2]=0;
+            }
+
+            if(poz2==poz1){
+                stara = poz1;
+                poz1 = -1;
+                stara_boo = bu1;
+
             }
         }
 
-*/      if(tah==1 && p_h1==2){
-            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[0], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
 
-        }else{
 
-            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_1, hrac1[p_h1-1], booster1[p_b1-1], R1, R2, hrac1[p_h1], booster1[p_b1] );
-
-        }
-        if(hrac1[p_h1]>n){
+        printf("\n[%d,2] [%d,%d] [%d,%d] [%d,%d]", tah, stara_o, stara_o_boo, R1, R2, poz2, bu2);
+        stara_o_boo = bu2;
+        if(poz2>=n)
+        {
+            vytaz=2;
             break;
         }
-    }else{
-        d=0;
-        R1= rnd(1,6);
-        R2=rnd(1,6);
-
-        if(hrac2[p_h2]==-1 && ((R1+R2>7))){
-            p_h2++;
-            hrac2[p_h2]=zavodna_draha[0];
-            d=(R1+R2-7);
-        }else{
-            p_h2++;
-            hrac2[p_h2]=hrac2[p_h2-1];
-            //printf("\n%d",hrac2[p_h2]);
-        }
-
-        if((hrac2[p_h2]>0 && hrac2[p_h2]<n-1)) {
-            if ((hrac2[p_h2] < hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 == R2 == 6)) {
-                p_h1++;
-                p_h2++;
-                hrac1[p_h1] = hrac1[p_h1 - 1];
-                hrac2[p_h2] = hrac2[p_h2 - 1];
-
-                int temp = hrac2[p_h2];
-                hrac2[p_h2] = hrac1[p_h1];
-                hrac1[p_h1]=temp;
-                d = 0;
-            } else if ((hrac2[p_h2] > hrac1[p_h1]) && (hrac1[p_h1] > 0 && hrac1[p_h1] < n - 1) && (R1 == R2 == 1)) {
-                p_h1++;
-                p_h2++;
-                hrac1[p_h1] = hrac1[p_h1 - 1];
-                hrac2[p_h2] = hrac2[p_h2 - 1];
-                int temp = hrac2[p_h2];
-                hrac2[p_h2] = hrac1[p_h1];
-                hrac1[p_h1]=temp;
-                d = 0;
-            } else {
-                d = max(R1, R2);
-
-            }
-        }
+        tah++;
 
 
-        if(d>0){
 
-            p_h2++;
-
-            hrac2[p_h2]=hrac2[p_h2-1]+d+booster2[p_b2];
-
-
-        }
-
-        if(zavodna_draha[hrac2[p_h2]]==2){
-            p_b2++;
-            pocet_nazbieranych_b2++;
-            booster2[p_b2]= pocet_nazbieranych_b2;
-            zavodna_draha[hrac2[p_h2]]==0;
-        }
-        /*else if(zavodna_draha[hrac1[p_h1]]==1){
-            if(booster1[p_b1]>0){
-                //p_b1++;
-                //pocet_nazbieranych_b1=0;
-                booster1[p_b1++]=0;
-                hrac1[p_b1++]=zavodna_draha[hrac1[p_h1-1]];
-            }else{
-                hrac1[p_h1++]=-1;
-            }
-        }
-
-*/
-
-        if(tah==2 && p_h2==2){
-            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[0], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
-
-        }else{
-            printf("\n[%d,%d] [%d,%d] [%d,%d] [%d,%d]", tah, hrac_2, hrac2[p_h2-1], booster2[p_b2-1], R1, R2, hrac2[p_h2], booster2[p_b2] );
-
-        }
-
-    }
-    if(hrac2[p_h2]>n){
-        break;
     }
 
 
 
 
-    tah++;
-}
-    for(int i=0;i<n;i++){
-        printf("%d ", zavodna_draha[i]);
-    }
+
+
     return 0;
 }
