@@ -34,6 +34,13 @@ int rnd(int from, int to) {
     return from + (int) SEED % (to - from + 1);
 }
 
+void Anuliraj(int* niz, int n)
+{
+    for(int i=0; i<n; i++)
+    {
+        niz[i]=0;
+    }
+}
 int main() {
 
     int seed;
@@ -137,9 +144,15 @@ int main() {
     int stara_o=0;
     int stara_o_boo=0;
 
+    int evidencija1[n];
+    int evidencija2[n];
+    Anuliraj(evidencija1,n);
+    Anuliraj(evidencija2,n);
+
 
 
     while(1>0){
+
         R1 = rnd(1,6);
         R2= rnd(1,6);
         if(poz1==-1)
@@ -164,13 +177,19 @@ int main() {
 
                 if(poz1<poz2 && R1==6 && R2==6){
                     int temp = poz1;
+                    stara=poz1;
+
                     poz1 = poz2;
-                    temp = poz2;
+                    poz2 = temp;
+                    evidencija2[poz2]++;
+
                     d=0;
                 }else if(poz1>poz2 && R1==1 && R2==1 && poz2>0 ){
                     int temp = poz2;
                     poz2 = poz1;
-                    temp = poz1;
+                    poz1 = temp;
+                    evidencija2[poz2]++;
+
                     d=0;
                 }else{
                     d = max(R1,R2);
@@ -202,7 +221,6 @@ int main() {
             if(bu1>0){
                 stara_boo = bu1;
                 bu1= 0;
-                stara=poz1;
             }else{
 
                 poz1 = -1;
@@ -218,9 +236,14 @@ int main() {
         }
 
 
+        if(poz1!=-1)
+        {
+            evidencija1[poz1]++;
+        }
 
         printf("\n[%d,1] [%d,%d] [%d,%d] [%d,%d]", tah, stara, stara_boo, R1, R2, poz1, bu1);
         stara_boo = bu1;
+        stara=poz1;
         if(poz1>=n)
             {
                 vytaz=1;
@@ -251,13 +274,16 @@ int main() {
 
             if(poz2<poz1 && R1==6 && R2==6){
                 int temp = poz2;
+                stara_o=poz2;
                 poz2 = poz1;
-                temp = poz1;
+                poz1 = temp;
+                evidencija1[poz1]++;
                 d=0;
             }else if(poz2>poz1 && R1==1 && R2==1 && poz1>0 ){
                 int temp = poz1;
                 poz1 = poz2;
-                temp = poz2;
+                poz2=temp;
+                evidencija1[poz1]++;
                 d=0;
             }else{
                 d = max(R1,R2);
@@ -290,7 +316,6 @@ int main() {
                 if(bu2>0){
                     stara_o_boo = bu2;
                     bu2= 0;
-                    stara_o=poz2;
                 }else{
 
                     poz2 = -1;
@@ -306,10 +331,13 @@ int main() {
             }
         }
 
-
-
+        if(poz2!=-1)
+        {
+            evidencija2[poz2]++;
+        }
         printf("\n[%d,2] [%d,%d] [%d,%d] [%d,%d]", tah, stara_o, stara_o_boo, R1, R2, poz2, bu2);
         stara_o_boo = bu2;
+        stara_o=poz2;
         if(poz2>=n)
         {
             vytaz=2;
@@ -320,6 +348,38 @@ int main() {
 
 
     }
+    if(vytaz==1)
+    {
+        printf("\nWINNER:%d",vytaz);
+    }
+    else
+        {
+            printf("\nWINNER:%d",vytaz);
+
+        }
+    int pozMax;
+    int posecenost=0;
+    for(int i=0; i<n;  i++)
+    {
+        if(evidencija1[i]!=0 && evidencija2[i]!=0)
+        {
+            pozMax=i;
+            posecenost=evidencija1[i]+evidencija2[i];
+            break;
+
+        }
+    }
+
+    for(int i=pozMax+1; i<n; i++)
+    {
+        if(evidencija1[i]+evidencija2[i]>evidencija1[pozMax]+evidencija2[pozMax])
+        {
+            pozMax=i;
+            posecenost=evidencija1[i]+evidencija2[i];
+        }
+    }
+    printf("\nHOTSPOT:%d",posecenost);
+
 
 
 
