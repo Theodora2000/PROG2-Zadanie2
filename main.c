@@ -196,7 +196,9 @@ int main() {
             bu1= stara_boo+1;
             zavodna_draha[poz1]=0;
         }
-        if(zavodna_draha[poz1]==1){
+        if(zavodna_draha[poz1]==1)
+        {
+            int t=poz1;
             if(bu1>0){
                 stara_boo = bu1;
                 bu1= 0;
@@ -205,7 +207,7 @@ int main() {
 
                 poz1 = -1;
             }
-            zavodna_draha[poz1]=0;
+            zavodna_draha[t]=0;
         }
 
         if(poz1==poz2){
@@ -284,6 +286,7 @@ int main() {
                 zavodna_draha[poz2]=0;
             }
             if(zavodna_draha[poz2]==1){
+                int t=poz2;
                 if(bu2>0){
                     stara_o_boo = bu2;
                     bu2= 0;
@@ -292,7 +295,7 @@ int main() {
 
                     poz2 = -1;
                 }
-                zavodna_draha[poz2]=0;
+                zavodna_draha[t]=0;
             }
 
             if(poz2==poz1){
